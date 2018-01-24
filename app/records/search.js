@@ -38,6 +38,11 @@ angular.module('myApp.recordsSearch', ['ngRoute'])
   $scope.tableParams = new NgTableParams({}, { dataset: $scope.records});
 
   $scope.fetchRecords = function() {
+    if ($scope.filter.maxCount <= $scope.filter.minCount) {
+      alert('Max. count couldnt be less than or equal to Min. count');
+      return;
+    }
+
     $rootScope.loading = true;
     var result = SearchRecordsService.query({
       startDate: $scope.filter.dates.startDate.toISOString().slice(0,10),
