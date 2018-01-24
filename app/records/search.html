@@ -1,0 +1,37 @@
+<h1>Search records</h1>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="daterange" class="col-xs-offset-2 col-xs-2 control-label">Date Interval</label>
+        <div class="col-xs-4">
+            <input type="daterange" ng-model="filter.dates" separator=" / " class="form-control" id="daterange" ranges="ranges">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="minCount" class="col-xs-offset-2 col-xs-2 control-label">Min. Count</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" id="minCount" placeholder="Min. count" ng-model="filter.minCount" numbers-only>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="maxCount" class="col-xs-offset-2 col-xs-2 control-label">Max. Count</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" id="maxCount" placeholder="Max. count" ng-model="filter.maxCount" numbers-only>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-5 col-xs-2">
+            <button type="submit" class="btn btn-default" ng-click="fetchRecords()">Sonuçları Göster</button>
+        </div>
+    </div>
+</form>
+<br>
+<br>
+<table ng-table="tableParams" class="table table-responsive table-bordered table-striped" show-filter="true">
+    <tr ng-repeat="record in $data">
+        <td title="'ID'">{{record._id._id}}</td>
+        <td title="'Key'">{{record._id.key}}</td>
+        <td title="'Value'">{{record._id.value | limitTo:16}}...</td>
+        <td title="'Count'">{{record.totalCount}}</td>
+        <td title="'Created at'">{{record._id.createdAt}}</td>
+    </tr>
+</table>
